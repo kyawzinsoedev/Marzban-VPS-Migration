@@ -269,19 +269,27 @@ tar -xzvf /root/marzban-backup.tar.gz -C /root/marzban-restore
 ## Restore Files
 
 ```bash
-cp -r /root/marzban-restore/marzban-backup/marzban /opt/
+cp -a /root/marzban-restore/marzban-backup/marzban/. /opt/marzban/
+```
+
+## Create Marzban Data Directory
+
+```bash
+mkdir -p /var/lib/marzban
 ```
 
 ## Restore Data
 
 ```bash
-cp -r /root/marzban-restore/marzban-backup/marzban-backup/* /var/lib/marzban
+cp -f /root/marzban-restore/marzban-backup/marzban/db.sqlite3 /var/lib/marzban/
+cp -f /root/marzban-restore/marzban-backup/marzban/xray_config.json /var/lib/marzban/
 ```
 
 ## Restore SSL Certificates
 
 ```bash
-cp -r /root/marzban-restore/marzban-backup/etc/letsencrypt /etc/
+mkdir -p /etc/letsencrypt
+cp -a /root/marzban-restore/marzban-backup/letsencrypt/. /etc/letsencrypt/
 ```
 
 ## Fix Permissions
@@ -294,6 +302,7 @@ chown -R root:root /opt/marzban
 
 ```bash
 cd /opt/marzban
+docker compose config
 docker compose up -d
 ```
 
@@ -308,13 +317,13 @@ docker ps
 Marzban:
 
 ```bash
-docker logs marzban
+docker compose logs --tail=100
 ```
 
-Xray:
+Verify Marzban
 
 ```bash
-docker logs marzban-xray
+curl -k https://127.0.0.1:8000
 ```
 
 ---
