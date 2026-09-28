@@ -250,7 +250,7 @@ sha256sum /root/marzban-backup.tar.gz
 ## Stop Existing Containers
 
 ```bash
-cd /opt/marzban
+mkdir -p /opt/marzban && cd /opt/marzban
 docker compose down
 ```
 
