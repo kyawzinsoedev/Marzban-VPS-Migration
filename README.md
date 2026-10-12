@@ -306,6 +306,13 @@ docker compose config
 docker compose up -d
 ```
 
+## Install Marzban & restart
+
+```bash
+sudo curl -sSL https://raw.githubusercontent.com/Gozargah/Marzban-scripts/master/marzban.sh -o /usr/local/bin/marzban && sudo chmod +x /usr/local/bin/marzban
+marzban restart
+```
+
 ## Check Containers
 
 ```bash
